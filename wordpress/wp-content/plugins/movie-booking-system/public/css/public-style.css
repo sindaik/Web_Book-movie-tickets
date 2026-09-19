@@ -1,0 +1,1955 @@
+/**
+ * Cinema Luxury Dark Theme - Movie Booking System
+ * Glassmorphism, 3D Screen Curve, Neon Accents & Micro-animations
+ */
+
+:root {
+	--mbs-bg-main: #0b0f19;
+	--mbs-bg-card: rgba(18, 24, 38, 0.75);
+	--mbs-bg-card-hover: rgba(28, 36, 54, 0.85);
+	--mbs-border: rgba(255, 255, 255, 0.08);
+	--mbs-border-active: rgba(229, 9, 20, 0.5);
+	--mbs-primary: #e50914;
+	--mbs-primary-hover: #f40612;
+	--mbs-primary-glow: rgba(229, 9, 20, 0.4);
+	--mbs-accent: #ffb800;
+	--mbs-cyan: #38bdf8;
+	--mbs-text-main: #f8fafc;
+	--mbs-text-muted: #94a3b8;
+	--mbs-font-heading: 'Outfit', -apple-system, sans-serif;
+	--mbs-font-body: 'Inter', -apple-system, sans-serif;
+}
+
+#mbs-app, #mbs-user-dashboard, #mbs-checkin-app {
+	background-color: transparent !important;
+	color: var(--mbs-text-main);
+	font-family: var(--mbs-font-body);
+	min-height: auto;
+	padding: 0 0 40px;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+/* Hide duplicate navbar when site cinema-header is present */
+.cinema-header-wrapper ~ * .mbs-nav,
+.cinema-main-container .mbs-nav {
+	display: none !important;
+}
+
+#mbs-app *, #mbs-user-dashboard *, #mbs-checkin-app * {
+	box-sizing: border-box;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, .mbs-logo-text {
+	font-family: var(--mbs-font-heading);
+	color: #ffffff;
+}
+
+/* -------------------------------------------------------------
+ * 1. Navigation Bar
+ * ------------------------------------------------------------- */
+.mbs-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 18px 36px;
+	background: rgba(11, 15, 25, 0.8);
+	backdrop-filter: blur(16px);
+	border-bottom: 1px solid var(--mbs-border);
+	position: sticky;
+	top: 0;
+	z-index: 999;
+}
+
+.mbs-nav-brand {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	text-decoration: none;
+}
+
+.mbs-logo-icon {
+	font-size: 28px;
+	filter: drop-shadow(0 0 10px var(--mbs-primary-glow));
+}
+
+.mbs-logo-text {
+	font-size: 24px;
+	font-weight: 800;
+	letter-spacing: 1.5px;
+	color: #ffffff;
+}
+
+.mbs-logo-text strong {
+	color: var(--mbs-primary);
+	text-shadow: 0 0 12px var(--mbs-primary-glow);
+}
+
+.mbs-nav-links {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+}
+
+.mbs-nav-item {
+	color: var(--mbs-text-muted);
+	text-decoration: none;
+	font-size: 15px;
+	font-weight: 500;
+	padding: 8px 16px;
+	border-radius: 8px;
+	transition: all 0.2s ease;
+}
+
+.mbs-nav-item:hover,
+.mbs-nav-item.active {
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.06);
+}
+
+.mbs-badge-staff {
+	background: rgba(56, 189, 248, 0.15) !important;
+	color: var(--mbs-cyan) !important;
+	border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+/* -------------------------------------------------------------
+ * 2. Hero Banner Slider
+ * ------------------------------------------------------------- */
+.mbs-hero-banner {
+	position: relative;
+	width: 100%;
+	height: 500px;
+	overflow: hidden;
+	background: #000000;
+	border-radius: 20px;
+	border: 1px solid var(--mbs-border);
+	box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.8);
+	margin-bottom: 28px;
+}
+
+.mbs-banner-slider {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.mbs-banner-slide {
+	position: absolute;
+	inset: 0;
+	background-size: cover;
+	background-position: center top;
+	display: flex;
+	align-items: center;
+	padding: 0 80px;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out, transform 0.8s ease-in-out;
+	transform: scale(1.02);
+	pointer-events: none;
+}
+
+.mbs-banner-slide.active {
+	opacity: 1;
+	visibility: visible;
+	transform: scale(1);
+	pointer-events: auto;
+	z-index: 1;
+}
+
+/* Slider Controls: Arrows & Dots */
+.mbs-slider-arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background: rgba(15, 23, 42, 0.75);
+	border: 1.5px solid rgba(255, 255, 255, 0.2);
+	color: #ffffff;
+	font-size: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	z-index: 10;
+	transition: all 0.3s ease;
+	backdrop-filter: blur(10px);
+}
+
+.mbs-slider-arrow:hover {
+	background: var(--mbs-primary);
+	border-color: var(--mbs-primary);
+	box-shadow: 0 0 25px var(--mbs-primary-glow);
+	transform: translateY(-50%) scale(1.12);
+}
+
+.mbs-slider-prev {
+	left: 20px;
+}
+
+.mbs-slider-next {
+	right: 20px;
+}
+
+.mbs-slider-dots {
+	position: absolute;
+	bottom: 24px;
+	left: 80px;
+	display: flex;
+	gap: 10px;
+	z-index: 10;
+}
+
+.mbs-slider-dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.35);
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mbs-slider-dot.active {
+	background: var(--mbs-primary);
+	width: 34px;
+	border-radius: 10px;
+	box-shadow: 0 0 15px var(--mbs-primary-glow);
+}
+
+.mbs-slider-dot:hover:not(.active) {
+	background: rgba(255, 255, 255, 0.75);
+}
+
+.mbs-banner-content {
+	max-width: 650px;
+	z-index: 2;
+	animation: mbsFadeUp 0.8s ease-out;
+}
+
+.mbs-badge-hot {
+	display: inline-block;
+	background: var(--mbs-primary);
+	color: #ffffff;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	padding: 4px 12px;
+	border-radius: 20px;
+	margin-bottom: 16px;
+	box-shadow: 0 0 15px var(--mbs-primary-glow);
+}
+
+.mbs-banner-title {
+	font-size: 42px;
+	font-weight: 800;
+	line-height: 1.15;
+	margin: 0 0 14px;
+	text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+}
+
+.mbs-banner-meta {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	margin-bottom: 16px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.mbs-rating {
+	color: var(--mbs-accent);
+}
+
+.mbs-age {
+	background: rgba(255, 255, 255, 0.15);
+	padding: 2px 8px;
+	border-radius: 4px;
+	font-size: 12px;
+}
+
+.mbs-format {
+	background: rgba(56, 189, 248, 0.2);
+	color: var(--mbs-cyan);
+	padding: 2px 8px;
+	border-radius: 4px;
+	font-size: 12px;
+}
+
+.mbs-banner-desc {
+	font-size: 15px;
+	line-height: 1.6;
+	color: var(--mbs-text-muted);
+	margin-bottom: 24px;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.mbs-banner-actions {
+	display: flex;
+	gap: 16px;
+}
+
+/* -------------------------------------------------------------
+ * 3. Buttons & Controls
+ * ------------------------------------------------------------- */
+.mbs-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 10px 20px;
+	border-radius: 10px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	border: none;
+	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	text-decoration: none;
+}
+
+.mbs-btn-primary {
+	background: linear-gradient(135deg, var(--mbs-primary), #b20710);
+	color: #ffffff;
+	box-shadow: 0 4px 14px var(--mbs-primary-glow);
+}
+
+.mbs-btn-primary:hover {
+	background: linear-gradient(135deg, var(--mbs-primary-hover), #e50914);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px var(--mbs-primary-glow);
+}
+
+.mbs-btn-secondary {
+	background: rgba(255, 255, 255, 0.1);
+	color: #ffffff;
+	backdrop-filter: blur(8px);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.mbs-btn-secondary:hover {
+	background: rgba(255, 255, 255, 0.2);
+	transform: translateY(-2px);
+}
+
+.mbs-btn-large {
+	padding: 14px 28px;
+	font-size: 16px;
+	border-radius: 12px;
+}
+
+.mbs-btn-block {
+	width: 100%;
+}
+
+.mbs-btn-sm {
+	padding: 6px 12px;
+	font-size: 12px;
+}
+
+.mbs-btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	transform: none !important;
+}
+
+/* -------------------------------------------------------------
+ * 4. Filter & Search Bar
+ * ------------------------------------------------------------- */
+.mbs-filter-section {
+	padding: 10px 0 24px;
+}
+
+.mbs-filter-container {
+	background: var(--mbs-bg-card);
+	backdrop-filter: blur(12px);
+	border: 1px solid var(--mbs-border);
+	border-radius: 16px;
+	padding: 16px 24px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+	flex-wrap: wrap;
+}
+
+.mbs-search-box {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	background: rgba(11, 15, 25, 0.6);
+	border: 1px solid var(--mbs-border);
+	border-radius: 10px;
+	padding: 8px 16px;
+	flex: 1;
+	min-width: 260px;
+}
+
+.mbs-search-icon {
+	font-size: 16px;
+	color: var(--mbs-text-muted);
+}
+
+.mbs-search-box input {
+	background: transparent;
+	border: none;
+	color: #ffffff;
+	font-size: 14px;
+	width: 100%;
+	outline: none;
+}
+
+.mbs-select-group {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.mbs-select {
+	background: rgba(11, 15, 25, 0.7);
+	border: 1px solid var(--mbs-border);
+	border-radius: 10px;
+	color: #ffffff;
+	padding: 10px 16px;
+	font-size: 14px;
+	outline: none;
+	cursor: pointer;
+}
+
+.mbs-select:focus {
+	border-color: var(--mbs-primary);
+}
+
+/* -------------------------------------------------------------
+ * 5. Movies Grid & Cards
+ * ------------------------------------------------------------- */
+.mbs-movies-section {
+	padding: 10px 0 40px;
+}
+
+.mbs-section-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 24px;
+}
+
+.mbs-section-title {
+	font-size: 24px;
+	font-weight: 700;
+	margin: 0;
+	position: relative;
+	padding-left: 16px;
+}
+
+.mbs-section-title::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 4px;
+	bottom: 4px;
+	width: 4px;
+	background: var(--mbs-primary);
+	border-radius: 2px;
+	box-shadow: 0 0 8px var(--mbs-primary);
+}
+
+.mbs-tab-buttons {
+	display: flex;
+	gap: 8px;
+	background: rgba(18, 24, 38, 0.8);
+	padding: 4px;
+	border-radius: 12px;
+	border: 1px solid var(--mbs-border);
+}
+
+.mbs-tab-btn {
+	background: transparent;
+	border: none;
+	color: var(--mbs-text-muted);
+	padding: 8px 18px;
+	font-size: 14px;
+	font-weight: 600;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.mbs-tab-btn.active {
+	background: var(--mbs-primary);
+	color: #ffffff;
+	box-shadow: 0 2px 10px var(--mbs-primary-glow);
+}
+
+.mbs-movies-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+	gap: 28px;
+}
+
+/* Movie Card */
+.mbs-movie-card {
+	background: var(--mbs-bg-card);
+	border: 1px solid var(--mbs-border);
+	border-radius: 16px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+}
+
+.mbs-movie-card:hover {
+	transform: translateY(-6px);
+	border-color: rgba(229, 9, 20, 0.4);
+	box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.6);
+}
+
+.mbs-poster-wrap {
+	position: relative;
+	width: 100%;
+	padding-top: 145%;
+	background: #111827;
+	overflow: hidden;
+}
+
+.mbs-poster-img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.5s ease;
+}
+
+.mbs-movie-card:hover .mbs-poster-img {
+	transform: scale(1.06);
+}
+
+.mbs-card-overlay {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(to top, rgba(11, 15, 25, 0.95) 10%, rgba(11, 15, 25, 0.2) 60%, transparent);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.mbs-movie-card:hover .mbs-card-overlay {
+	opacity: 1;
+}
+
+.mbs-play-trailer-btn {
+	background: rgba(229, 9, 20, 0.9);
+	color: #ffffff;
+	border: none;
+	border-radius: 50%;
+	width: 54px;
+	height: 54px;
+	font-size: 20px;
+	cursor: pointer;
+	box-shadow: 0 0 20px var(--mbs-primary);
+	transform: scale(0.8);
+	transition: transform 0.2s ease;
+}
+
+.mbs-movie-card:hover .mbs-play-trailer-btn {
+	transform: scale(1);
+}
+
+.mbs-card-badges {
+	position: absolute;
+	top: 12px;
+	left: 12px;
+	display: flex;
+	gap: 6px;
+	z-index: 2;
+}
+
+.mbs-badge-rating {
+	background: rgba(11, 15, 25, 0.85);
+	backdrop-filter: blur(6px);
+	color: var(--mbs-accent);
+	font-size: 11px;
+	font-weight: 700;
+	padding: 3px 8px;
+	border-radius: 6px;
+	border: 1px solid rgba(255, 184, 0, 0.3);
+}
+
+.mbs-card-info {
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	justify-content: space-between;
+}
+
+.mbs-movie-title {
+	font-size: 16px;
+	font-weight: 700;
+	margin: 0 0 8px;
+	line-height: 1.3;
+	color: #ffffff;
+}
+
+.mbs-movie-meta-row {
+	display: flex;
+	justify-content: space-between;
+	font-size: 12px;
+	color: var(--mbs-text-muted);
+	margin-bottom: 12px;
+}
+
+.mbs-movie-genres {
+	font-size: 11px;
+	color: #38bdf8;
+	margin-bottom: 14px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* -------------------------------------------------------------
+ * 6. Modals
+ * ------------------------------------------------------------- */
+.mbs-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 999999;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+.mbs-modal.active {
+	display: flex;
+	animation: mbsFadeIn 0.2s ease-out;
+}
+
+.mbs-modal-overlay {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.85);
+	backdrop-filter: blur(10px);
+}
+
+.mbs-modal-dialog {
+	position: relative;
+	background: #131a29;
+	border: 1px solid var(--mbs-border);
+	border-radius: 20px;
+	width: 100%;
+	max-width: 540px;
+	max-height: 90vh;
+	overflow-y: auto;
+	box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+	z-index: 2;
+}
+
+.mbs-modal-lg {
+	max-width: 850px;
+}
+
+.mbs-modal-xl {
+	max-width: 1180px;
+	max-height: 95vh;
+}
+
+.mbs-modal-video {
+	max-width: 900px;
+	background: #000;
+	padding: 0;
+}
+
+.mbs-modal-close {
+	position: absolute;
+	top: 18px;
+	right: 18px;
+	background: rgba(255, 255, 255, 0.1);
+	border: none;
+	color: #ffffff;
+	font-size: 24px;
+	line-height: 1;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	cursor: pointer;
+	z-index: 10;
+	transition: background 0.2s;
+}
+
+.mbs-modal-close:hover {
+	background: var(--mbs-primary);
+}
+
+.mbs-video-wrapper {
+	position: relative;
+	padding-top: 56.25%;
+	width: 100%;
+}
+
+.mbs-video-wrapper iframe {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+	border-radius: 20px;
+}
+
+/* -------------------------------------------------------------
+ * 7. Movie Detail Modal
+ * ------------------------------------------------------------- */
+.mbs-movie-detail-grid {
+	display: grid;
+	grid-template-columns: 280px 1fr;
+	gap: 30px;
+	padding: 30px;
+}
+
+.mbs-detail-poster img {
+	width: 100%;
+	border-radius: 14px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.mbs-detail-header h2 {
+	font-size: 28px;
+	margin: 0 0 12px;
+}
+
+.mbs-detail-meta {
+	display: flex;
+	gap: 14px;
+	margin-bottom: 16px;
+	font-size: 13px;
+	color: var(--mbs-text-muted);
+}
+
+.mbs-detail-desc {
+	font-size: 14px;
+	line-height: 1.6;
+	color: #cbd5e1;
+	margin-bottom: 24px;
+}
+
+/* Showtimes Schedule Tabs */
+.mbs-schedule-wrap h3 {
+	font-size: 18px;
+	margin-bottom: 14px;
+	border-bottom: 1px solid var(--mbs-border);
+	padding-bottom: 8px;
+}
+
+.mbs-cinema-block {
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid var(--mbs-border);
+	border-radius: 12px;
+	padding: 16px;
+	margin-bottom: 16px;
+}
+
+.mbs-cinema-name {
+	font-size: 16px;
+	font-weight: 700;
+	color: #ffb800;
+	margin: 0 0 4px;
+}
+
+.mbs-cinema-addr {
+	font-size: 12px;
+	color: var(--mbs-text-muted);
+	margin-bottom: 12px;
+}
+
+.mbs-date-tabs {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 12px;
+	overflow-x: auto;
+}
+
+.mbs-date-pill {
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid var(--mbs-border);
+	color: var(--mbs-text-muted);
+	padding: 6px 14px;
+	border-radius: 20px;
+	font-size: 12px;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.mbs-date-pill.active {
+	background: var(--mbs-primary);
+	color: #ffffff;
+	border-color: var(--mbs-primary);
+}
+
+.mbs-time-slots {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.mbs-time-btn {
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 8px;
+	color: #ffffff;
+	padding: 8px 16px;
+	font-size: 14px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: all 0.2s;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.mbs-time-btn span {
+	font-size: 10px;
+	font-weight: 400;
+	color: var(--mbs-text-muted);
+}
+
+.mbs-time-btn:hover {
+	background: var(--mbs-primary);
+	border-color: var(--mbs-primary);
+	transform: scale(1.05);
+}
+
+/* -------------------------------------------------------------
+ * 8. Interactive Seat Map (Sơ Đồ Ghế)
+ * ------------------------------------------------------------- */
+.mbs-seat-booking-wrapper {
+	display: grid;
+	grid-template-columns: 1fr 340px;
+	min-height: 560px;
+}
+
+.mbs-seat-map-col {
+	padding: 24px 30px;
+	background: #0d121f;
+	border-right: 1px solid var(--mbs-border);
+	display: flex;
+	flex-direction: column;
+}
+
+.mbs-seat-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+#mbs-seat-movie-title {
+	margin: 0 0 4px;
+	font-size: 20px;
+}
+
+#mbs-seat-showtime-meta {
+	margin: 0;
+	font-size: 13px;
+	color: var(--mbs-text-muted);
+}
+
+.mbs-timer-pill {
+	background: rgba(239, 68, 68, 0.15);
+	border: 1px solid rgba(239, 68, 68, 0.3);
+	color: #f87171;
+	padding: 6px 14px;
+	border-radius: 20px;
+	font-size: 13px;
+	animation: mbsPulse 2s infinite;
+}
+
+/* 3D Curved Cinema Screen */
+.mbs-screen-container {
+	perspective: 500px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.mbs-screen-curve {
+	height: 18px;
+	width: 80%;
+	margin: 0 auto 8px;
+	background: linear-gradient(180deg, rgba(56, 189, 248, 0.6), transparent);
+	border-top: 4px solid var(--mbs-cyan);
+	border-radius: 50% 50% 0 0;
+	box-shadow: 0 -10px 25px rgba(56, 189, 248, 0.3);
+	transform: rotateX(-30deg);
+}
+
+.mbs-screen-label {
+	font-size: 11px;
+	letter-spacing: 2px;
+	color: var(--mbs-text-muted);
+}
+
+/* Seat Canvas */
+.mbs-seats-canvas {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	padding: 10px 0 20px;
+	overflow-x: auto;
+	flex: 1;
+}
+
+.mbs-seat-row {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.mbs-row-lbl {
+	width: 20px;
+	font-size: 12px;
+	font-weight: 700;
+	color: #64748b;
+	text-align: center;
+}
+
+/* Seat Item Styles */
+.mbs-seat-item {
+	width: 32px;
+	height: 30px;
+	border-radius: 6px 6px 4px 4px;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	background: #1e293b;
+	color: #e2e8f0;
+	font-size: 10px;
+	font-weight: 600;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+}
+
+.mbs-seat-item:hover:not(.status-booked):not(.status-locked) {
+	transform: scale(1.15);
+	border-color: #ffffff;
+}
+
+/* Seat Type: Regular */
+.mbs-seat-item.type-regular {
+	background: #273549;
+	border-color: #3b4d66;
+}
+
+/* Seat Type: VIP */
+.mbs-seat-item.type-vip {
+	background: #854d0e;
+	border-color: #eab308;
+	color: #fef08a;
+}
+
+/* Seat Type: Couple (Double) */
+.mbs-seat-item.type-couple {
+	background: #9f1239;
+	border-color: #fb7185;
+	color: #ffe4e6;
+	width: 68px; /* Double width */
+}
+
+/* Seat Status: Selected (User's choice) */
+.mbs-seat-item.status-selected {
+	background: var(--mbs-primary) !important;
+	border-color: #ff4d58 !important;
+	color: #ffffff !important;
+	box-shadow: 0 0 12px var(--mbs-primary);
+	transform: scale(1.1);
+}
+
+/* Seat Status: Locked (Temporary hold by other) */
+.mbs-seat-item.status-locked {
+	background: #475569 !important;
+	border-color: #64748b !important;
+	color: #94a3b8 !important;
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+/* Seat Status: Booked */
+.mbs-seat-item.status-booked {
+	background: #18202f !important;
+	border-color: #1e293b !important;
+	color: #475569 !important;
+	cursor: not-allowed;
+	opacity: 0.35;
+	text-decoration: line-through;
+}
+
+/* Legend */
+.mbs-seat-legend {
+	display: flex;
+	gap: 16px;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	padding-top: 14px;
+	border-top: 1px solid var(--mbs-border);
+	font-size: 12px;
+	color: var(--mbs-text-muted);
+}
+
+.mbs-legend-item {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.mbs-seat-sample {
+	display: inline-block;
+	width: 16px;
+	height: 15px;
+	border-radius: 4px;
+}
+
+.mbs-seat-sample.seat-regular { background: #273549; }
+.mbs-seat-sample.seat-vip { background: #854d0e; border: 1px solid #eab308; }
+.mbs-seat-sample.seat-couple { background: #9f1239; border: 1px solid #fb7185; }
+.mbs-seat-sample.seat-selected { background: var(--mbs-primary); box-shadow: 0 0 6px var(--mbs-primary); }
+.mbs-seat-sample.seat-locked { background: #475569; }
+.mbs-seat-sample.seat-booked { background: #18202f; border: 1px solid #334155; }
+
+/* Right Summary Col */
+.mbs-seat-summary-col {
+	padding: 24px 20px;
+	background: #141c2c;
+	display: flex;
+	flex-direction: column;
+}
+
+.mbs-summary-title {
+	margin: 0 0 16px;
+	font-size: 18px;
+	border-bottom: 1px solid var(--mbs-border);
+	padding-bottom: 10px;
+}
+
+.mbs-summary-card {
+	background: rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	padding: 12px;
+	margin-bottom: 16px;
+}
+
+.mbs-summary-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 14px;
+	margin-bottom: 8px;
+}
+
+.mbs-highlight-text {
+	color: var(--mbs-accent);
+}
+
+.mbs-combos-section {
+	flex: 1;
+	overflow-y: auto;
+	margin-bottom: 16px;
+}
+
+.mbs-sub-title {
+	margin: 0 0 10px;
+	font-size: 14px;
+	color: #ffffff;
+}
+
+.mbs-combo-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid var(--mbs-border);
+	border-radius: 10px;
+	padding: 10px;
+	margin-bottom: 8px;
+}
+
+.mbs-combo-info strong {
+	display: block;
+	font-size: 13px;
+	color: #ffffff;
+}
+
+.mbs-combo-info span {
+	font-size: 11px;
+	color: var(--mbs-text-muted);
+}
+
+.mbs-combo-price {
+	font-size: 12px;
+	color: #38bdf8;
+	margin-top: 2px;
+}
+
+.mbs-counter {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.mbs-counter-btn {
+	background: rgba(255, 255, 255, 0.1);
+	border: none;
+	color: #fff;
+	width: 26px;
+	height: 26px;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.mbs-counter-val {
+	font-size: 13px;
+	font-weight: 700;
+	min-width: 14px;
+	text-align: center;
+}
+
+.mbs-coupon-box {
+	display: flex;
+	gap: 6px;
+	margin-bottom: 14px;
+}
+
+.mbs-coupon-box input {
+	flex: 1;
+	background: rgba(0, 0, 0, 0.3);
+	border: 1px solid var(--mbs-border);
+	border-radius: 8px;
+	padding: 8px 12px;
+	color: #ffffff;
+	font-size: 13px;
+	text-transform: uppercase;
+}
+
+.mbs-alert-msg {
+	padding: 8px 12px;
+	border-radius: 8px;
+	font-size: 12px;
+	margin-bottom: 12px;
+}
+
+.mbs-alert-success {
+	background: rgba(34, 197, 94, 0.15);
+	color: #4ade80;
+	border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.mbs-alert-error {
+	background: rgba(239, 68, 68, 0.15);
+	color: #f87171;
+	border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.mbs-checkout-summary {
+	border-top: 1px dashed var(--mbs-border);
+	padding-top: 12px;
+	margin-bottom: 16px;
+}
+
+.mbs-total-row {
+	font-size: 16px;
+	font-weight: 700;
+	margin-top: 8px;
+}
+
+.mbs-grand-total {
+	font-size: 20px;
+	color: #22c55e;
+}
+
+/* -------------------------------------------------------------
+ * 9. Checkout & Payment Modal
+ * ------------------------------------------------------------- */
+.mbs-modal-content {
+	padding: 28px;
+}
+
+.mbs-modal-heading {
+	margin-top: 0;
+	font-size: 22px;
+	border-bottom: 1px solid var(--mbs-border);
+	padding-bottom: 12px;
+}
+
+.mbs-form-group {
+	margin-bottom: 16px;
+}
+
+.mbs-form-group label {
+	display: block;
+	font-size: 13px;
+	font-weight: 600;
+	color: #cbd5e1;
+	margin-bottom: 6px;
+}
+
+.mbs-form-group input {
+	width: 100%;
+	background: rgba(0, 0, 0, 0.35);
+	border: 1px solid var(--mbs-border);
+	border-radius: 10px;
+	padding: 12px 16px;
+	color: #ffffff;
+	font-size: 14px;
+	outline: none;
+	transition: border-color 0.2s;
+}
+
+.mbs-form-group input:focus {
+	border-color: var(--mbs-primary);
+}
+
+.mbs-payment-options {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.mbs-payment-card {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid var(--mbs-border);
+	border-radius: 12px;
+	padding: 12px 16px;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.mbs-payment-card:hover,
+.mbs-payment-card.active {
+	background: rgba(229, 9, 20, 0.08);
+	border-color: var(--mbs-primary);
+}
+
+.mbs-pay-icon {
+	font-size: 24px;
+}
+
+.mbs-pay-info strong {
+	display: block;
+	font-size: 14px;
+	color: #ffffff;
+}
+
+.mbs-pay-info span {
+	font-size: 12px;
+	color: var(--mbs-text-muted);
+}
+
+.mbs-order-total-preview {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 16px;
+	background: rgba(34, 197, 94, 0.1);
+	border: 1px solid rgba(34, 197, 94, 0.25);
+	border-radius: 12px;
+	margin: 20px 0;
+	font-size: 16px;
+}
+
+.mbs-order-total-preview strong {
+	font-size: 22px;
+	color: #4ade80;
+}
+
+/* -------------------------------------------------------------
+ * 10. Perforated Cinema Ticket & QR Code
+ * ------------------------------------------------------------- */
+.mbs-modal-ticket {
+	max-width: 600px;
+	background: transparent;
+	border: none;
+	box-shadow: none;
+}
+
+.mbs-ticket-container {
+	background: #162032;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	position: relative;
+}
+
+.mbs-ticket-header {
+	background: linear-gradient(135deg, var(--mbs-primary), #990000);
+	padding: 24px;
+	text-align: center;
+	color: #ffffff;
+}
+
+.mbs-ticket-header h2 {
+	margin: 0;
+	font-size: 22px;
+	letter-spacing: 1px;
+}
+
+.mbs-ticket-body {
+	padding: 24px;
+}
+
+.mbs-ticket-movie-title {
+	font-size: 22px;
+	font-weight: 700;
+	color: var(--mbs-accent);
+	margin-bottom: 16px;
+}
+
+.mbs-ticket-info-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+	margin-bottom: 20px;
+	font-size: 13px;
+}
+
+.mbs-ticket-info-item span {
+	display: block;
+	color: var(--mbs-text-muted);
+}
+
+.mbs-ticket-info-item strong {
+	color: #ffffff;
+	font-size: 14px;
+}
+
+/* Perforation line */
+.mbs-perforation {
+	position: relative;
+	height: 20px;
+	margin: 10px 0;
+	display: flex;
+	align-items: center;
+}
+
+.mbs-perforation::before,
+.mbs-perforation::after {
+	content: '';
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	background: var(--mbs-bg-main);
+	border-radius: 50%;
+	top: -2px;
+}
+
+.mbs-perforation::before { left: -12px; }
+.mbs-perforation::after { right: -12px; }
+
+.mbs-perf-dash {
+	width: 100%;
+	border-top: 2px dashed rgba(255, 255, 255, 0.2);
+}
+
+.mbs-ticket-qr-section {
+	text-align: center;
+	padding: 16px;
+}
+
+.mbs-qr-wrapper {
+	display: inline-block;
+	background: #ffffff;
+	padding: 10px;
+	border-radius: 12px;
+	margin-bottom: 8px;
+}
+
+.mbs-ticket-code-str {
+	font-family: monospace;
+	font-size: 16px;
+	letter-spacing: 3px;
+	color: var(--mbs-cyan);
+}
+
+.mbs-ticket-actions {
+	display: flex;
+	gap: 14px;
+	margin-top: 16px;
+}
+
+.mbs-ticket-actions button,
+.mbs-ticket-actions a {
+	flex: 1;
+}
+
+/* -------------------------------------------------------------
+ * 11. User Account & Checkin Views
+ * ------------------------------------------------------------- */
+.mbs-dashboard-wrapper,
+.mbs-checkin-wrapper {
+	max-width: 1100px;
+	margin: 40px auto;
+	padding: 0 20px;
+}
+
+.mbs-auth-card {
+	background: var(--mbs-bg-card);
+	border: 1px solid var(--mbs-border);
+	border-radius: 20px;
+	padding: 50px 30px;
+	text-align: center;
+	max-width: 500px;
+	margin: 60px auto;
+}
+
+.mbs-auth-icon {
+	font-size: 54px;
+	margin-bottom: 16px;
+}
+
+.mbs-auth-actions {
+	display: flex;
+	gap: 16px;
+	justify-content: center;
+	margin-top: 24px;
+}
+
+.mbs-dash-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: var(--mbs-bg-card);
+	border: 1px solid var(--mbs-border);
+	border-radius: 16px;
+	padding: 24px 30px;
+	margin-bottom: 30px;
+}
+
+.mbs-dash-user {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+}
+
+.mbs-dash-avatar img {
+	border-radius: 50%;
+	border: 2px solid var(--mbs-primary);
+}
+
+.mbs-points-badge {
+	text-align: right;
+}
+
+.mbs-points-val {
+	display: block;
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--mbs-accent);
+}
+
+.mbs-order-history-card {
+	background: var(--mbs-bg-card);
+	border: 1px solid var(--mbs-border);
+	border-radius: 16px;
+	padding: 20px 24px;
+	margin-bottom: 18px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+
+.mbs-order-meta strong {
+	font-size: 18px;
+	color: #ffffff;
+}
+
+.mbs-order-meta p {
+	margin: 4px 0 0;
+	font-size: 13px;
+	color: var(--mbs-text-muted);
+}
+
+/* Staff Checkin */
+.mbs-checkin-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 30px;
+	margin-top: 30px;
+}
+
+.mbs-scanner-card,
+.mbs-result-card {
+	background: var(--mbs-bg-card);
+	border: 1px solid var(--mbs-border);
+	border-radius: 20px;
+	padding: 24px;
+}
+
+.mbs-qr-reader-box {
+	width: 100%;
+	min-height: 280px;
+	border-radius: 12px;
+	overflow: hidden;
+	background: #000000;
+	margin-bottom: 16px;
+}
+
+/* Animations */
+@keyframes mbsFadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes mbsFadeUp {
+	from { opacity: 0; transform: translateY(20px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mbsPulse {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0.6; }
+}
+
+/* Spinner */
+.mbs-spinner {
+	width: 40px;
+	height: 40px;
+	border: 3px solid rgba(255, 255, 255, 0.1);
+	border-top-color: var(--mbs-primary);
+	border-radius: 50%;
+	animation: mbsSpin 0.8s linear infinite;
+	margin: 40px auto;
+}
+
+@keyframes mbsSpin {
+	to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+	.mbs-hero-banner { height: 400px; }
+	.mbs-banner-slide { padding: 0 24px; }
+	.mbs-banner-title { font-size: 28px; }
+	.mbs-seat-booking-wrapper { grid-template-columns: 1fr; }
+	.mbs-movie-detail-grid { grid-template-columns: 1fr; }
+	.mbs-checkin-grid { grid-template-columns: 1fr; }
+	.mbs-cinemas-grid, .mbs-promotions-grid { grid-template-columns: 1fr; }
+}
+
+/* -------------------------------------------------------------
+ * Promotions & Combos Section Styling
+ * ------------------------------------------------------------- */
+.mbs-promotions-section,
+.mbs-cinemas-section {
+	margin: 60px 0 30px;
+	padding: 0;
+}
+
+.mbs-section-subtitle {
+	font-size: 14px;
+	color: var(--mbs-text-muted);
+	margin: 6px 0 0;
+	font-weight: 400;
+}
+
+.mbs-promotions-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+	gap: 24px;
+	margin-top: 24px;
+}
+
+.mbs-promo-card {
+	position: relative;
+	background: rgba(18, 24, 38, 0.75);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 18px;
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	backdrop-filter: blur(16px);
+	transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	overflow: hidden;
+}
+
+.mbs-promo-card:hover {
+	transform: translateY(-5px);
+	border-color: rgba(229, 9, 20, 0.4);
+	box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(229, 9, 20, 0.2);
+}
+
+.mbs-promo-tag {
+	position: absolute;
+	top: 14px;
+	right: 14px;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	padding: 4px 10px;
+	border-radius: 20px;
+	color: #ffffff;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.mbs-promo-header {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 12px;
+}
+
+.mbs-promo-discount {
+	font-family: var(--mbs-font-heading);
+	font-size: 26px;
+	font-weight: 800;
+	color: #ff3366;
+	text-shadow: 0 0 15px rgba(255, 51, 102, 0.4);
+}
+
+.mbs-promo-badge {
+	font-size: 11px;
+	font-weight: 700;
+	background: rgba(255, 255, 255, 0.1);
+	color: #ffffff;
+	padding: 3px 8px;
+	border-radius: 6px;
+}
+
+.mbs-promo-title {
+	font-size: 17px;
+	font-weight: 700;
+	margin: 0 0 8px;
+	color: #ffffff;
+	line-height: 1.4;
+}
+
+.mbs-promo-desc {
+	font-size: 13px;
+	color: var(--mbs-text-muted);
+	margin: 0 0 20px;
+	line-height: 1.5;
+	flex: 1;
+}
+
+.mbs-promo-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding-top: 16px;
+	border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.mbs-promo-code-box {
+	background: rgba(0, 0, 0, 0.4);
+	border: 1px dashed rgba(255, 255, 255, 0.2);
+	border-radius: 8px;
+	padding: 6px 12px;
+	font-size: 13px;
+	color: #ffffff;
+}
+
+.mbs-promo-code-box strong {
+	color: #00ff88;
+	letter-spacing: 1px;
+}
+
+.mbs-combo-card {
+	border-left: 3px solid #ff3366;
+}
+
+.mbs-combo-price-label {
+	font-size: 12px;
+	color: var(--mbs-text-muted);
+}
+
+.mbs-copied-btn {
+	background: #10b981 !important;
+	border-color: #10b981 !important;
+	color: #ffffff !important;
+}
+
+/* -------------------------------------------------------------
+ * Cinemas System Section Styling
+ * ------------------------------------------------------------- */
+.mbs-cinemas-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+	gap: 24px;
+	margin-top: 24px;
+}
+
+.mbs-cinema-card {
+	background: rgba(18, 24, 38, 0.75);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 18px;
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	backdrop-filter: blur(16px);
+	transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mbs-cinema-card:hover {
+	transform: translateY(-5px);
+	border-color: rgba(0, 240, 255, 0.4);
+	box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 240, 255, 0.2);
+}
+
+.mbs-cinema-card-top {
+	margin-bottom: 16px;
+}
+
+.mbs-cinema-name-group {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 12px;
+}
+
+.mbs-cinema-title {
+	font-size: 18px;
+	font-weight: 700;
+	color: #ffffff;
+	margin: 0;
+	line-height: 1.4;
+}
+
+.mbs-cinema-city-badge {
+	font-size: 11px;
+	font-weight: 700;
+	background: rgba(0, 240, 255, 0.15);
+	color: #00f0ff;
+	border: 1px solid rgba(0, 240, 255, 0.3);
+	padding: 3px 10px;
+	border-radius: 12px;
+	white-space: nowrap;
+}
+
+.mbs-cinema-details {
+	margin-bottom: 20px;
+	flex: 1;
+}
+
+.mbs-cinema-detail-row {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	font-size: 13px;
+	color: var(--mbs-text-muted);
+	margin: 0 0 8px;
+	line-height: 1.5;
+}
+
+.mbs-cinema-detail-row i {
+	margin-top: 3px;
+	color: #ff3366;
+	flex-shrink: 0;
+}
+
+.mbs-cinema-detail-row a {
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.mbs-cinema-detail-row a:hover {
+	color: var(--mbs-primary);
+}
+
+.mbs-cinema-formats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 14px;
+}
+
+.mbs-format-chip {
+	font-size: 11px;
+	font-weight: 600;
+	background: rgba(255, 255, 255, 0.06);
+	color: #cbd5e1;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	padding: 4px 8px;
+	border-radius: 6px;
+}
+
+.mbs-cinema-card-actions {
+	display: flex;
+	gap: 10px;
+	padding-top: 16px;
+	border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* -------------------------------------------------------------
+ * Order History Enhancements
+ * ------------------------------------------------------------- */
+.mbs-order-header-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 8px;
+}
+
+.mbs-order-movie-title {
+	font-size: 17px;
+	color: #ffffff;
+	font-weight: 700;
+}
+
+.mbs-status-badge {
+	font-size: 11px;
+	font-weight: 700;
+	padding: 4px 10px;
+	border-radius: 12px;
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	white-space: nowrap;
+}
+
+.mbs-status-paid {
+	background: rgba(16, 185, 129, 0.15);
+	color: #10b981;
+	border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.mbs-status-pending {
+	background: rgba(245, 158, 11, 0.15);
+	color: #f59e0b;
+	border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.mbs-status-cancelled {
+	background: rgba(239, 68, 68, 0.15);
+	color: #ef4444;
+	border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.mbs-order-combo-text {
+	font-size: 13px;
+	color: #cbd5e1;
+	margin: 6px 0 0;
+}
+
+/* Quick Ticket Lookup Box */
+.mbs-lookup-card {
+	background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+	border: 1px solid rgba(0, 229, 255, 0.35);
+	box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(0, 229, 255, 0.08);
+	border-radius: 20px;
+	padding: 30px;
+	margin-bottom: 25px;
+	position: relative;
+	overflow: hidden;
+}
+
+.mbs-lookup-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	background: linear-gradient(90deg, #ff0055, #00e5ff);
+}
+
+.mbs-lookup-header {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	margin-bottom: 20px;
+}
+
+.mbs-lookup-icon {
+	width: 52px;
+	height: 52px;
+	border-radius: 14px;
+	background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(255, 0, 85, 0.2));
+	border: 1px solid rgba(0, 229, 255, 0.4);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 22px;
+	color: #00e5ff;
+	flex-shrink: 0;
+}
+
+.mbs-lookup-title {
+	font-size: 22px;
+	font-weight: 700;
+	color: #ffffff;
+	margin: 0 0 6px;
+}
+
+.mbs-lookup-desc {
+	font-size: 14px;
+	color: #94a3b8;
+	margin: 0;
+	line-height: 1.5;
+}
+
+.mbs-lookup-desc code {
+	background: rgba(255, 255, 255, 0.1);
+	padding: 2px 6px;
+	border-radius: 4px;
+	color: #00e5ff;
+}
+
+.mbs-lookup-input-wrap {
+	display: flex;
+	gap: 12px;
+	position: relative;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.mbs-lookup-input-wrap .mbs-input-icon {
+	position: absolute;
+	left: 18px;
+	color: #00e5ff;
+	font-size: 18px;
+	pointer-events: none;
+}
+
+.mbs-lookup-input-wrap input {
+	flex: 1;
+	min-width: 260px;
+	padding: 14px 18px 14px 48px;
+	background: rgba(15, 23, 42, 0.85);
+	border: 1.5px solid rgba(255, 255, 255, 0.15);
+	border-radius: 12px;
+	color: #ffffff;
+	font-size: 15px;
+	transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.mbs-lookup-input-wrap input:focus {
+	outline: none;
+	border-color: #00e5ff;
+	box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
+}
+
+.mbs-lookup-result-box {
+	margin-top: 24px;
+	padding-top: 20px;
+	border-top: 1px dashed rgba(255, 255, 255, 0.15);
+}

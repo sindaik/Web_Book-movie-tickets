@@ -1,0 +1,202 @@
+/**
+ * WordPress Admin FontAwesome 6 Styling
+ * Replaces default Dashicons with modern FontAwesome 6 icons and cleans unused icons.
+ */
+
+/* ==========================================================================
+   1. Left Admin Sidebar Menu (#adminmenu)
+   ========================================================================== */
+
+/* Set FontAwesome 6 on menu icon pseudo-elements */
+#adminmenu div.wp-menu-image:before,
+#adminmenu .dashicons-before:before {
+	font-family: "Font Awesome 6 Free" !important;
+	font-weight: 900 !important;
+	font-size: 15px !important;
+	transition: all 0.2s ease-in-out;
+}
+
+/* Specific Menu Item Icons */
+/* Dashboard (Bảng tin) */
+#menu-dashboard .wp-menu-image:before,
+.dashicons-dashboard:before {
+	content: "\f015" !important; /* fa-house */
+}
+
+/* Posts (Bài viết) */
+#menu-posts .wp-menu-image:before,
+.dashicons-admin-post:before {
+	content: "\f1ea" !important; /* fa-newspaper */
+}
+
+/* Media (Thư viện media) */
+#menu-media .wp-menu-image:before,
+.dashicons-admin-media:before {
+	content: "\f87c" !important; /* fa-photo-film */
+}
+
+/* Pages (Trang) */
+#menu-pages .wp-menu-image:before,
+.dashicons-admin-page:before {
+	content: "\f15c" !important; /* fa-file-lines */
+}
+
+/* Comments (Bình luận) */
+#menu-comments .wp-menu-image:before,
+.dashicons-admin-comments:before {
+	content: "\f086" !important; /* fa-comments */
+}
+
+/* Movie Booking System (Quản Lý Rạp Phim) */
+#toplevel_page_mbs-dashboard .wp-menu-image:before,
+.dashicons-tickets-alt:before {
+	content: "\f008" !important; /* fa-film */
+}
+
+/* Appearance (Giao diện) */
+#menu-appearance .wp-menu-image:before,
+.dashicons-admin-appearance:before {
+	content: "\f53f" !important; /* fa-palette */
+}
+
+/* Plugins (Gói mở rộng) */
+#menu-plugins .wp-menu-image:before,
+.dashicons-admin-plugins:before {
+	content: "\f12e" !important; /* fa-puzzle-piece */
+}
+
+/* Users (Thành viên / Người dùng) */
+#menu-users .wp-menu-image:before,
+.dashicons-admin-users:before {
+	content: "\f0c0" !important; /* fa-users */
+}
+
+/* Tools (Công cụ) */
+#menu-tools .wp-menu-image:before,
+.dashicons-admin-tools:before {
+	content: "\f7d9" !important; /* fa-screwdriver-wrench */
+}
+
+/* Settings (Cài đặt) */
+#menu-settings .wp-menu-image:before,
+.dashicons-admin-settings:before {
+	content: "\f013" !important; /* fa-gear */
+}
+
+/* Custom Post Types */
+#menu-posts-movie .wp-menu-image:before,
+.dashicons-format-video:before {
+	content: "\f008" !important; /* fa-film */
+}
+
+#menu-posts-cinema .wp-menu-image:before,
+.dashicons-building:before {
+	content: "\f1ad" !important; /* fa-building */
+}
+
+#menu-posts-showtime .wp-menu-image:before,
+.dashicons-clock:before {
+	content: "\f017" !important; /* fa-clock */
+}
+
+/* Collapse Menu Button */
+#collapse-button:before,
+#collapse-menu .collapse-button-icon:before,
+.dashicons-admin-collapse:before {
+	font-family: "Font Awesome 6 Free" !important;
+	font-weight: 900 !important;
+	content: "\f100" !important; /* fa-angles-left */
+	font-size: 14px !important;
+}
+
+body.folded #collapse-button:before {
+	content: "\f101" !important; /* fa-angles-right */
+}
+
+/* Generic Fallback */
+.dashicons-admin-generic:before {
+	content: "\f105" !important; /* fa-angle-right */
+}
+
+/* ==========================================================================
+   2. Top WP Admin Bar (#wpadminbar)
+   ========================================================================== */
+
+#wpadminbar .ab-icon:before,
+#wpadminbar .ab-item:before {
+	font-family: "Font Awesome 6 Free" !important;
+	font-weight: 900 !important;
+	font-size: 14px !important;
+}
+
+/* WP Logo */
+#wp-admin-bar-wp-logo > .ab-item .ab-icon:before {
+	font-family: "Font Awesome 6 Brands" !important;
+	font-weight: 400 !important;
+	content: "\f19a" !important; /* fa-brands fa-wordpress */
+	font-size: 16px !important;
+}
+
+/* Site Home */
+#wp-admin-bar-site-name > .ab-item:before {
+	content: "\f015" !important; /* fa-house */
+}
+
+/* Updates */
+#wp-admin-bar-updates .ab-icon:before {
+	content: "\f021" !important; /* fa-arrows-rotate */
+}
+
+/* Comments */
+#wp-admin-bar-comments .ab-icon:before {
+	content: "\f075" !important; /* fa-comment */
+}
+
+/* New (+ Add New) */
+#wp-admin-bar-new-content .ab-icon:before {
+	content: "\f067" !important; /* fa-plus */
+}
+
+/* My Account */
+#wp-admin-bar-my-account > .ab-item:before {
+	content: "\f2bd" !important; /* fa-circle-user */
+}
+
+/* ==========================================================================
+   3. Hide / Clean Unused Icons
+   ========================================================================== */
+
+/* Hide empty or blank menu icons that create awkward gaps */
+#adminmenu .wp-menu-image:empty:not([class*="dashicons-"]):not([class*="fa-"]),
+#adminmenu .wp-menu-image.dashicons-none {
+	display: none !important;
+}
+
+/* Clean up separator spacing */
+#adminmenu li.wp-menu-separator {
+	margin: 6px 0 !important;
+	height: 1px !important;
+	background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ==========================================================================
+   4. MBS Submenu Styling & Icons
+   ========================================================================== */
+#adminmenu .wp-submenu a {
+	display: flex !important;
+	align-items: center !important;
+	gap: 8px !important;
+}
+
+#adminmenu .wp-submenu a i.fa-solid,
+#adminmenu .wp-submenu a i.fa-regular {
+	font-size: 13px !important;
+	width: 16px !important;
+	text-align: center !important;
+	color: #94a3b8 !important;
+}
+
+#adminmenu .wp-submenu li.current a i,
+#adminmenu .wp-submenu a:hover i {
+	color: #38bdf8 !important;
+}
